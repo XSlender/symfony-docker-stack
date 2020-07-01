@@ -1,0 +1,80 @@
+FROM php:7-fpm
+
+RUN apt-get update \ 
+	&& apt-get install -y libmemcached-dev \
+	zlib1g-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+	libgeoip-dev \
+	libgmp-dev \
+	libicu-dev \
+	libmcrypt-dev \
+	libxml2-dev \
+	libxslt-dev \
+	git \
+	cron \ 
+	vim \ 
+	nano \ 
+	procps \ 
+    libzip-dev \
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN pecl install redis \
+	&& pecl install memcached \
+	&& pecl install apcu \
+	&& pecl install geoip-1.1.1 \
+	&& pecl install igbinary \
+	&& pecl install msgpack
+
+RUN docker-php-ext-enable redis \
+	&& docker-php-ext-enable memcached \
+	&& docker-php-ext-enable apcu \ 
+	&& docker-php-ext-enable geoip \
+	&& docker-php-ext-enable igbinary \
+	&& docker-php-ext-enable msgpack
+
+RUN docker-php-ext-configure zip
+
+RUN docker-php-ext-install -j4 bcmath \
+	&& docker-php-ext-install -j4 calendar \
+	&& docker-php-ext-install -j4 exif \
+	&& docker-php-ext-install -j4 gd \
+	&& docker-php-ext-install -j4 gettext \
+	&& docker-php-ext-install -j4 gmp \
+	&& docker-php-ext-install -j4 intl \
+	&& docker-php-ext-install -j4 mysqli \
+	&& docker-php-ext-install -j4 pdo_mysql \
+	&& docker-php-ext-install -j4 shmop \
+	&& docker-php-ext-install -j4 soap \
+	&& docker-php-ext-install -j4 sockets \
+	&& docker-php-ext-install -j4 sysvmsg \
+	&& docker-php-ext-install -j4 sysvsem \
+	&& docker-php-ext-install -j4 sysvshm \
+	&& docker-php-ext-install -j4 xsl \
+	&& docker-php-ext-install -j4 zip \
+	&& docker-php-ext-install -j4 opcache
+
+COPY etc/php/docker-php-ext-opcache.ini /usr/local/etc/php/conf.d/
+RUN chmod 644 /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+
+COPY etc/php/www.conf /usr/local/etc/php-fpm.d/
+RUN chmod 644 /usr/local/etc/php-fpm.d/www.conf
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+	&& php composer-setup.php \
+	&& mv composer.phar /bin/composer \
+	&& php -r "unlink('composer-setup.php');"
+
+RUN curl -sS https://get.symfony.com/cli/installer | bash && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+
+COPY etc/php/php.ini /usr/local/etc/php
+RUN chmod 644 /usr/local/etc/php/php.ini
+RUN rm -f /etc/localtime \
+	&& ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+
+RUN ln -s /usr/local/bin/php /bin/php
+
+ARG PROJECT_SOURCE_DIR
+
+WORKDIR $PROJECT_SOURCE_DIR

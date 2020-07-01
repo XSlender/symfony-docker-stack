@@ -1,0 +1,21 @@
+version: '3.6'
+
+services:
+  php:
+    build:
+        context: ../..
+        dockerfile: ./docker.d/dockerfiles/Dockerfile-php
+        args:
+            PROJECT_SOURCE_DIR: ${PROJECT_SOURCE_DIR}
+    container_name: ${ENV}_${PROJECT_NAME}_php
+    restart: always
+    environment:
+      - TZ=${TIMEZONE}
+      - APP_ENV=${ENV}
+      - APP_SECRET=${APP_SECRET}
+      - CORS_ALLOW_ORIGIN=${CORS_ALLOW_ORIGIN}
+      - PROJECT_SOURCE_DIR:${PROJECT_SOURCE_DIR}
+    volumes:
+      - ${PROJECT_SOURCE_DIR}:${PROJECT_SOURCE_DIR}
+    networks:
+      - symfony-stack
