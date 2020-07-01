@@ -14,6 +14,8 @@ You need to have installed on your linux machine :
 * git : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git
 * make : https://www.gnu.org/software/make/
 
+*Note :* This works well with a virtualized Linux on WSL2 Windows Ubuntu 20.04 image.
+
 ## Installation
 
 First you need to clone this repository.
