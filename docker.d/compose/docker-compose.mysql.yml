@@ -1,0 +1,19 @@
+version: '3.6'
+
+services:
+  mysql:
+    build:
+      context: ../..
+      dockerfile: ./docker.d/dockerfiles/Dockerfile-mysql
+    container_name: ${ENV}_${PROJECT_NAME}_mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${CURRENT_DIR}/run/mysql:/var/lib/mysql
+      - ${CURRENT_DIR}/etc/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+    ports:
+      - 3306:3306
+    networks:
+      - symfony-stack

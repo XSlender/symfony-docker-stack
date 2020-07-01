@@ -1,0 +1,3 @@
+FROM mysql:5.7.27
+
+RUN chmod 644 /etc/mysql/conf.d/mysql.cnf
