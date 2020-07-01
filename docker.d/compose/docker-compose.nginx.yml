@@ -1,0 +1,27 @@
+version: "3.6"
+
+services:
+    nginx:
+        build:
+            context: ../..
+            dockerfile: ./docker.d/dockerfiles/Dockerfile-nginx
+        container_name: ${ENV}_${PROJECT_NAME}_nginx
+        restart: always
+        environment:
+            - DOLLAR=$$
+            - TZ=${TIMEZONE}
+            - NGINX_WORKER_PROCESSES=auto
+            - NGINX_WORKER_CONNECTIONS=4096
+            - NGINX_GZIP=off
+            - DOCUMENT_ROOT=${PROJECT_SOURCE_DIR}
+            - PHP_CONTAINER=${ENV}_${PROJECT_NAME}_php
+        volumes:
+            - /mnt/c/Users/adrie/Projects/symfony-docker-stack/etc/nginx/nginx.conf.template:/etc/nginx/nginx.conf.template:ro
+            - /mnt/c/Users/adrie/Projects/symfony-docker-stack/etc/nginx/vhosts.conf.template:/etc/nginx/conf.d/vhosts.conf.template:ro
+            - ${PROJECT_SOURCE_DIR}:${PROJECT_SOURCE_DIR}:ro
+        ports:
+            - 80:80
+        networks:
+            - symfony-stack
+        depends_on:
+            - php

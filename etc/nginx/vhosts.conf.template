@@ -1,0 +1,27 @@
+server {
+    listen 80;
+
+    root ${DOCUMENT_ROOT};
+
+    location / {
+        try_files ${DOLLAR}uri /index.php${DOLLAR}is_args${DOLLAR}args;
+    }
+
+    location ~ ^/index\.php(/|${DOLLAR}) {
+        fastcgi_pass ${PHP_CONTAINER}:9000;
+        fastcgi_split_path_info ^(.+\.php)(/.+)${DOLLAR};
+        include fastcgi_params;
+
+        fastcgi_param SCRIPT_FILENAME ${DOLLAR}document_root${DOLLAR}fastcgi_script_name;
+        fastcgi_index index.php;
+
+        internal;
+    }
+
+    location ~ \.php${DOLLAR} {
+        return 404;
+    }
+
+    error_log  /dev/stderr;
+    access_log /dev/stdout main;
+}
