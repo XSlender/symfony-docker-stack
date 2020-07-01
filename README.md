@@ -46,11 +46,11 @@ This will :
 
 ## common commands
 | Goal | Command | arguments |
-|---|---|---|
-| Start the stack | make up | |
-| Stop the stack | make down | |
-| Get logs of container | make log CONTAINER | CONTAINER : `nginx|php|mysql` |
-| Connect to a container | make exec CONTAINER | CONTAINER : `nginx|php|mysql` |
+|---|---|-----|
+| Start the stack | `make up` | |
+| Stop the stack | `make down` | |
+| Get logs of container | `make log CONTAINER` | CONTAINER : `nginx,php,mysql` |
+| Connect to a container | `make exec CONTAINER` | CONTAINER : `nginx,php,mysql` |
 
 ## Thanks
 Thanks to Maxime Gottie for his work.
