@@ -35,3 +35,8 @@ log:
 
 exec:
 	@docker exec -ti ${ENV}_${PROJECT_NAME}_${EXEC_ARGS} bash
+
+init:
+	@printf "${RED}- not available yet - ${RESET}\n"
+	# up
+	# init database with user and database
