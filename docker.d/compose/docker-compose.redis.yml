@@ -10,8 +10,9 @@ services:
     environment:
      - REDIS_REPLICATION_MODE=master
     volumes:
-      - $PWD/run/redis:/var/lib/redis
+      - $PWD/run/redis:/datamake
     ports:
       - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
     networks:
       - symfony-stack
