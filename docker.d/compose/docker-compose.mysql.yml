@@ -11,8 +11,8 @@ services:
       - MYSQL_ROOT_PASSWORD=toor
       - TZ=${TIMEZONE}
     volumes:
-      - ${CURRENT_DIR}/run/mysql:/var/lib/mysql
-      - ${CURRENT_DIR}/etc/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+      - $PWD/run/mysql:/var/lib/mysql
+      - $PWD/etc/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
     ports:
       - 3306:3306
     networks:

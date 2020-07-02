@@ -16,8 +16,8 @@ services:
             - DOCUMENT_ROOT=${PROJECT_SOURCE_DIR}
             - PHP_CONTAINER=${ENV}_${PROJECT_NAME}_php
         volumes:
-            - /mnt/c/Users/adrie/Projects/symfony-docker-stack/etc/nginx/nginx.conf.template:/etc/nginx/nginx.conf.template:ro
-            - /mnt/c/Users/adrie/Projects/symfony-docker-stack/etc/nginx/vhosts.conf.template:/etc/nginx/conf.d/vhosts.conf.template:ro
+            - $PWD/etc/nginx/nginx.conf.template:/etc/nginx/nginx.conf.template:ro
+            - $PWD/etc/nginx/vhosts.conf.template:/etc/nginx/conf.d/vhosts.conf.template:ro
             - ${PROJECT_SOURCE_DIR}:${PROJECT_SOURCE_DIR}:ro
         ports:
             - 80:80

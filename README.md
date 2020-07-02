@@ -7,6 +7,7 @@ It will contain :
 * Nginx - latest
 * PHP-FPM - 7.latest
 * MySQL - 5.7.27
+* Redis - latest
 
 ## Prerequisite
 You need to have installed on your linux machine :

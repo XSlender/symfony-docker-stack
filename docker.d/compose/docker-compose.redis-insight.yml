@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  redis-insight:
+    build:
+        context: ../..
+        dockerfile: ./docker.d/dockerfiles/Dockerfile-redis-insight
+    container_name: ${ENV}_${PROJECT_NAME}_redis-insight
+    restart: always
+    volumes:
+      - $PWD/run/redis:/db
+    ports:
+      - "8001:8001"
+    networks:
+      - symfony-stack
+    depends_on:
+      - redis
