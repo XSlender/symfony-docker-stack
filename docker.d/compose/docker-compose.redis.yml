@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  redis:
+    build:
+        context: ../..
+        dockerfile: ./docker.d/dockerfiles/Dockerfile-redis
+    container_name: ${ENV}_${PROJECT_NAME}_redis
+    restart: always
+    environment:
+     - REDIS_REPLICATION_MODE=master
+    volumes:
+      - $PWD/run/redis:/var/lib/redis
+    ports:
+      - "6379:6379"
+    networks:
+      - symfony-stack

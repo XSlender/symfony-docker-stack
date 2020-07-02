@@ -6,6 +6,7 @@
 
 include .env
 include ./make.d/colors.make
+include ./make.d/strings.make
 
 .DEFAULT_GOAL := help
 
@@ -23,12 +24,19 @@ help:
 	@printf "\n${LIGHTPURPLE}RTFM NOOB${RESET}\n\n"
 
 up:
-	@printf "${GREEN}Waking and building ${PROJECT_NAME}...${RESET}\n"
-	@docker-compose up -d --build
+	@printf "${GREEN}Waking ${PROJECT_NAME}...${RESET}\n"
+	@printf "${GREEN}${DOTTED_LINE}${RESET}\n"
+	@docker-compose up -d
 
 down:
 	@printf "${YELLOW}shutting down ${PROJECT_NAME}...${RESET}\n"
+	@printf "${YELLOW}${DOTTED_LINE}${RESET}\n"
 	@docker-compose down
+
+build:
+	@printf "${GREEN}Building ${PROJECT_NAME}...${RESET}\n"
+	@printf "${GREEN}${DOTTED_LINE}${RESET}\n"
+	@docker-compose build
 
 log:
 	@docker logs -f ${ENV}_${PROJECT_NAME}_${LOGS_ARGS}
@@ -36,7 +44,4 @@ log:
 exec:
 	@docker exec -ti ${ENV}_${PROJECT_NAME}_${EXEC_ARGS} bash
 
-init:
-	@printf "${RED}- not available yet - ${RESET}\n"
-	# up
-	# init database with user and database
+init: build
