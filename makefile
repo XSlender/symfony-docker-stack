@@ -61,4 +61,4 @@ connect-help:
 
 ## next step
 ## stack ELK
-## interactive build for env generation
+## interactive build for env generation -> use .ONESHELL for multiline realdline etc

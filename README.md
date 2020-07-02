@@ -8,6 +8,7 @@ It will contain :
 * PHP-FPM - 7.latest
 * MySQL - 5.7.27
 * Redis - latest
+* Redis insight - latest *(for dev purpose only)*
 
 ## Prerequisite
 You need to have installed on your linux machine :
@@ -54,6 +55,11 @@ This will :
 | Stop the stack | `make down` | |
 | Get logs of container | `make log CONTAINER` | CONTAINER : `nginx,php,mysql` |
 | Connect to a container | `make exec CONTAINER` | CONTAINER : `nginx,php,mysql` |
+
+## Next steps
+* add an ELK stack
+* make environment files creation interactive
+* automatic building of Symfony dotenv file
 
 ## Thanks
 Thanks to Maxime Gottie for his work.
