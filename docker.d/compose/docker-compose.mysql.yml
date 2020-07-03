@@ -10,9 +10,9 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=toor
       - TZ=${TIMEZONE}
+    command: mysqld --sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
     volumes:
       - $PWD/run/mysql:/var/lib/mysql
-      - $PWD/etc/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
     ports:
       - 3306:3306
     networks:

@@ -13,7 +13,7 @@ services:
             - NGINX_WORKER_PROCESSES=auto
             - NGINX_WORKER_CONNECTIONS=4096
             - NGINX_GZIP=off
-            - DOCUMENT_ROOT=${PROJECT_SOURCE_DIR}
+            - DOCUMENT_ROOT=${PROJECT_SOURCE_DIR}/public
             - PHP_CONTAINER=${ENV}_${PROJECT_NAME}_php
         volumes:
             - $PWD/etc/nginx/nginx.conf.template:/etc/nginx/nginx.conf.template:ro
