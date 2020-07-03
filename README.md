@@ -29,36 +29,34 @@ cd symfony-docker-stack
 Now you need to edit the environment file.
 
 ```bash
-cp .env.dist .env
-vi .env
-```
-
-Follow the instructions and you will be good to go.
-> If you need more details about environment details, please check the [environment variable documentation](./docs/environment-variables.md).
-
-Now that your environment is configured, you will need to initialize your project.
-
-```bash
 make init
 ```
 
-This will :
-* compose and build the project.
-* initialize the database with a default user.
+This process will :
+1. Get sudo permissions
+2. Gather some infos to build the project
+3. Generate the docker environment file
+4. Create the folder tree for running apps
+5. Build docker containers
+6. Launch (compose up) all the containers
+7. Create the `symfony` user on the database
+
+> **Note :** This process will erase previous iteration of the **same** project *(aka in the same folder)* in the `run` folder, meaning you will lose all your database related data (mysql & redis). You may want to backup those data before re-typing `make init` on an existing project.
 
 > You can read the complete manual of the makefile in the [makefile documentation](./docs/makefile.md).
 
 ## common commands
 | Goal | Command | arguments |
 |---|---|-----|
+| Initialize the project | `make init` | |
 | Start the stack | `make up` | |
 | Stop the stack | `make down` | |
+| Get connection helper | `make connect-help` | |
 | Get logs of container | `make log CONTAINER` | CONTAINER : `nginx,php,mysql` |
 | Connect to a container | `make exec CONTAINER` | CONTAINER : `nginx,php,mysql` |
 
 ## Next steps
 * add an ELK stack
-* make environment files creation interactive
 * automatic building of Symfony dotenv file
 
 ## Thanks

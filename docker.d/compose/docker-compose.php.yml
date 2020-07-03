@@ -19,6 +19,9 @@ services:
       - ${PROJECT_SOURCE_DIR}:${PROJECT_SOURCE_DIR}
     networks:
       - symfony-stack
+    links:
+      - mysql
+      - redis
     depends_on:
       - mysql
       - redis

@@ -11,6 +11,7 @@ include ./make.d/strings.make
 .DEFAULT_GOAL := help
 
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
+WHOAMI := $$(whoami)
 
 ifeq (log,$(firstword $(MAKECMDGOALS)))
   LOGS_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
@@ -57,6 +58,11 @@ init:
 	@printf "questions andbuilding for you all the mandatory stuff.\n"
 	@printf "\n"
 	@printf "${BLUE}Stay calm, get a cup of coffee, and let start.${RESET}\n"
+	@printf "\n"
+	@printf "${BLUE}First, let's obtain sudo permissions${RESET}\n"
+	@sudo ls > /dev/null
+	@printf "\n"
+	@printf "${BLUE}Now, let's complete some info about the project${RESET}\n"
 	@printf "\n"
 	## interactive variables definitinon
 	@COMPOSE_PROJECT_NAME=""
@@ -120,6 +126,8 @@ init:
 	@mkdir run/mysql
 	@mkdir run/redis
 	@mkdir run/redis-insight
+	@[ -d ${PROJECT_SOURCE_DIR} ] || mkdir ${PROJECT_SOURCE_DIR}
+	@sudo chown -R ${WHOAMI}:${WHOAMI} ${PROJECT_SOURCE_DIR}
 	@printf "\t${GREEN}done${RESET}\n"
 	## building machines
 	@printf "\n"
@@ -149,7 +157,7 @@ init:
 	@printf "\t${GREEN}--- Yay ! $${PROJECT_NAME} is started and ready ! ---${RESET}\n"
 	@printf "\n"
 	@printf "${BLUE}Symfony application :${RESET} http://localhost\n"
-	@printf "${BLUE}MySQL database :${RESET} mysql://${DB_USER}:${DB_PASSWD}@${DB_HOST}:${DB_PORT}/${DB_NAME}\n"
+	@printf "${BLUE}MySQL database :${RESET} mysql://${DB_USER}:$${DB_PASSWD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?serverVersion=5.7\n"
 	@printf "${BLUE}Redis database :${RESET} redis://${ENV}_${PROJECT_NAME}_redis:${REDIS_PORT}\n"
 	@printf "${BLUE}Redis insight :${RESET} http://localhost:8001 (to configure the database, use the same host and port as the redis database)\n"
 	@printf "${YELLOW}You can find back this list with 'make connect-help'${RESET}\n"
@@ -161,7 +169,7 @@ connect-help:
 	@printf "${BLUE}Listing access for ${PROJECT_NAME}...${RESET}\n"
 	@printf "${BLUE}${DOTTED_LINE}${RESET}\n"
 	@printf "${BLUE}Symfony application :${RESET} http://localhost\n"
-	@printf "${BLUE}MySQL database :${RESET} mysql://${DB_USER}:${DB_PASSWD}@${DB_HOST}:${DB_PORT}/${DB_NAME}\n"
+	@printf "${BLUE}MySQL database :${RESET} mysql://${DB_USER}:${DB_PASSWD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?serverVersion=5.7\n"
 	@printf "${BLUE}Redis database :${RESET} redis://${ENV}_${PROJECT_NAME}_redis:${REDIS_PORT}\n"
 	@printf "${BLUE}Redis insight :${RESET} http://localhost:8001 (to configure the database, use the same host and port as the redis database)\n"
 	@printf "\n"
