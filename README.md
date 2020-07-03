@@ -45,6 +45,8 @@ This process will :
 
 > You can read the complete manual of the makefile in the [makefile documentation](./docs/makefile.md).
 
+Now you can take all data you need from the console (or from `make connect-help`) and complete your Symfony dotenv and start to code \o/.
+
 ## common commands
 | Goal | Command | arguments |
 |---|---|-----|
