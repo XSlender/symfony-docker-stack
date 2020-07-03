@@ -26,8 +26,7 @@ First you need to clone this repository.
 git clone https://github.com/XSlender/symfony-docker-stack.git
 cd symfony-docker-stack
 ```
-Now you need to edit the environment file.
-
+Now you just need to initialize your project with :
 ```bash
 make init
 ```
