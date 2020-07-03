@@ -24,7 +24,7 @@ endif
 
 
 help:
-	@printf "\n${LIGHTPURPLE}RTFM NOOB${RESET}\n\n"
+	@printf "\n${YELLOW}Go to https://github.com/XSlender/symfony-docker-stack for documentation.${RESET}\n\n"
 
 up:
 	@printf "${GREEN}Waking ${PROJECT_NAME}...${RESET}\n"
