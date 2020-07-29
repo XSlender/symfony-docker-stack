@@ -57,6 +57,8 @@ Now you can take all data you need from the console (or from `make connect-help`
 | Connect to a container | `make exec CONTAINER` | CONTAINER : `nginx,php,mysql` |
 
 ## Next steps
+* limit RAM
+* get health check for each service
 * add an ELK stack
 * automatic building of Symfony dotenv file
 
